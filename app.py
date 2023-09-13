@@ -2,16 +2,14 @@ import streamlit as st
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
-data = pd.read_csv('netflix_titles.csv')
 from sklearn.feature_extraction.text import TfidfVectorizer
+
+data = pd.read_csv('netflix_titles.csv')
 
 tfidf_vectorizer = TfidfVectorizer(stop_words='english')
 tfidf_matrix = tfidf_vectorizer.fit_transform(data['description'])
 
-# print(tfidf_matrix)
-
 cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
-# print(cosine_sim)
 
 def get_recommendation(title,num_recommendations=10):
     title = title.lower()
@@ -35,5 +33,4 @@ def pred():
     st.dataframe(results)
 
 if __name__ == '__main__':
-  
-  pred()
+     pred()
